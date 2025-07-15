@@ -1,0 +1,173 @@
+.banner{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+.banner .slider{
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: 10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autoRun 20s linear infinite;
+    z-index: 2;
+}
+@keyframes autoRun{
+    from{
+        transform: perspective(1000px) rotateX(-12deg) rotateY(0deg);
+    }to{
+        transform: perspective(1000px) rotateX(-12deg) rotateY(360deg)
+    }
+}
+.banner .slider .item{
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: 
+        rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+        translateZ(550px);
+}
+.banner .slider .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.banner .content{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.banner .content h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 16em;
+    line-height: 1em;
+    color: #25283B;
+    position: relative;
+}
+.banner .content h1::after{
+    position: absolute;
+    inset: 0 0 0 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 1px #d2d2d2;
+    color: transparent;
+}
+.banner .content .author{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    text-align: right;
+    max-width: 200px;
+    padding-right: 10px;
+}
+.banner .content h2{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 3em;
+    font-weight: bolder;
+}
+.banner .content .model{
+    background-image: url(images/model.png);
+    width: 100%;
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: auto 130%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    z-index: 1;
+}
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .banner .slider {
+        width: 180px;
+        height: 220px;
+        top: 12%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(400px);
+    }
+
+    .banner .content h1 {
+        font-size: 10em;
+    }
+
+    .banner .content .model {
+        background-size: auto 110%;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner .slider {
+        width: 150px;
+        height: 180px;
+        top: 15%;
+    }
+
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(320px);
+    }
+
+    .banner .content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .banner .content h1 {
+        font-size: 7em;
+        text-align: center;
+    }
+
+    .banner .content .author {
+        text-align: center;
+        max-width: none;
+    }
+
+    .banner .content .model {
+        background-size: auto 100%;
+        background-position: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner .slider {
+        width: 120px;
+        height: 160px;
+        top: 16%;
+    }
+
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(280px);
+    }
+
+    .banner .content h1 {
+        font-size: 4em;
+    }
+
+    .banner .content h2 {
+        font-size: 1.5em;
+    }
+
+    .banner .content .model {
+        height: 50vh;
+    }
+}
